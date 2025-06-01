@@ -1,0 +1,187 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'ChalkDuster';
+  src: url('https://db.onlinewebfonts.com/t/9d66ced3ff5a0fb4d4dfd1f31ff38e8d.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Quicksand';
+  src: url('https://fonts.gstatic.com/s/quicksand/v30/6xK-dSZaM9iE8KbpRA_LJ3z8mH9BOJvgkP8o58m-wg.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --chalk-white: #F5F5F5;
+  --chalk-neon: #39FF14;
+  --chalk-blue: #4FC3F7;
+  --chalk-pink: #FF80AB;
+  --chalk-yellow: #FFEB3B;
+  --blackboard-dark: #2A3B4C;
+  --blackboard-darker: #1A2B3C;
+  --blackboard-surface: #243447;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-blackboard-darker text-chalk-white font-body antialiased;
+  background-image: url('/textures/blackboard-texture.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+.font-chalk {
+  font-family: 'ChalkDuster', cursive;
+  text-shadow: 0 0 5px rgba(245, 245, 245, 0.7);
+}
+
+.chalk-stroke {
+  position: relative;
+}
+
+.chalk-stroke::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--chalk-white);
+  transition: width 0.3s ease;
+  box-shadow: 0 0 8px rgba(245, 245, 245, 0.8);
+}
+
+.chalk-stroke:hover::after {
+  width: 100%;
+}
+
+.blackboard-panel {
+  background-color: rgba(36, 52, 71, 0.85);
+  border: 2px solid rgba(245, 245, 245, 0.1);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.chalk-glow {
+  filter: drop-shadow(0 0 4px rgba(245, 245, 245, 0.6));
+}
+
+.chalk-neon-glow {
+  filter: drop-shadow(0 0 5px rgba(57, 255, 20, 0.7));
+}
+
+@keyframes writingEffect {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.writing-animation {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: writingEffect 3s ease forwards;
+}
+
+.chalk-dust {
+  pointer-events: none;
+}
+
+.drawing-canvas {
+  cursor: url('/icons/chalk-cursor.png'), auto;
+}
+
+/* Hide scrollbar but allow scrolling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--blackboard-darker);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(245, 245, 245, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(245, 245, 245, 0.5);
+}
+
+/* Custom focus styles */
+*:focus {
+  outline: 2px solid var(--chalk-neon);
+  outline-offset: 2px;
+}
+
+/* Custom input styles */
+.chalk-input {
+  background: transparent;
+  border: 2px solid var(--chalk-white);
+  box-shadow: 0 0 8px rgba(245, 245, 245, 0.3);
+  color: var(--chalk-white);
+  transition: all 0.2s ease;
+}
+
+.chalk-input:focus {
+  border-color: var(--chalk-neon);
+  box-shadow: 0 0 12px rgba(57, 255, 20, 0.5);
+}
+
+/* Button styles */
+.chalk-btn {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.chalk-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(245, 245, 245, 0.2), transparent);
+  transition: all 0.5s ease;
+}
+
+.chalk-btn:hover::before {
+  left: 100%;
+}
+
+.mobile-nav-enter {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.mobile-nav-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.mobile-nav-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mobile-nav-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 300ms, transform 300ms;
+}
